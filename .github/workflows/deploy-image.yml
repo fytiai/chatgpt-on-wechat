@@ -10,7 +10,7 @@ env:
 
 jobs:
   build-and-push-image:
-    if: github.repository == 'ghcr.io/fytiai/chatgpt-on-wechat'
+    if: github.repository == 'fytiai/chatgpt-on-wechat'
     runs-on: ubuntu-latest
     permissions:
       contents: read

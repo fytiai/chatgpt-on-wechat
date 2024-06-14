@@ -24,7 +24,7 @@
     "画"
   ],
   "speech_recognition": true,
-  "open_ai_voice_api_base": "https://5041cfbbca07142004.gradio.live/v1",                         
+  "open_ai_speech_base": "https://5041cfbbca07142004.gradio.live/v1",
   "group_speech_recognition": false,
   "voice_reply_voice": false,
   "conversation_max_tokens": 2500,

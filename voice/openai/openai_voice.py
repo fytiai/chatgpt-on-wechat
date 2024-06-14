@@ -21,7 +21,7 @@ class OpenaiVoice(Voice):
         logger.debug("[Openai] voice file name={}".format(voice_file))
         try:
             file = open(voice_file, "rb")
-            api_base = conf().get("open_ai_api_base") or "https://api.openai.com/v1"
+            api_base = conf().get("open_ai_voice_api_base") or "https://api.openai.com/v1"
             url = f'{api_base}/audio/transcriptions'
             headers = {
                 'Authorization': 'Bearer ' + conf().get("open_ai_api_key"),
@@ -46,7 +46,7 @@ class OpenaiVoice(Voice):
 
     def textToVoice(self, text):
         try:
-            api_base = conf().get("open_ai_api_base") or "https://api.openai.com/v1"
+            api_base = conf().get("open_ai_voice_api_base") or "https://api.openai.com/v1"
             url = f'{api_base}/audio/speech'
             headers = {
                 'Authorization': 'Bearer ' + conf().get("open_ai_api_key"),

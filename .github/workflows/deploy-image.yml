@@ -59,18 +59,6 @@ jobs:
           flavor: |
             latest=${{ github.ref == 'refs/heads/main' }}
 
-      - name: Extract metadata for Docker cache
-        id: cache-meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.FULL_IMAGE_NAME }}
-          tags: |
-            type=ref,event=branch
-            ${{ github.ref_type == 'tag' && 'type=raw,value=main' || '' }}
-          flavor: |
-            prefix=cache-${{ matrix.platform }}-
-            latest=false
-
       - name: Build Docker image (latest)
         uses: docker/build-push-action@v3
         id: build
@@ -80,9 +68,6 @@ jobs:
           platforms: ${{ matrix.platform }}
           tags: ${{ steps.meta.outputs.tags }}  # include latest tag conditionally
           labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=image,name=${{ env.FULL_IMAGE_NAME }},push-by-digest=true,name-canonical=true,push=true
-          cache-from: type=registry,ref=${{ steps.cache-meta.outputs.tags }}
-          cache-to: type=registry,ref=${{ steps.cache-meta.outputs.tags }},mode=max
           build-args: |
             BUILD_HASH=${{ github.sha }}
 

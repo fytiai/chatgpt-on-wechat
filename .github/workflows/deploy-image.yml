@@ -59,16 +59,21 @@ jobs:
           flavor: |
             latest=${{ github.ref == 'refs/heads/main' }}
 
+      - name: Print extracted metadata
+        run: |
+          echo "Tags: ${{ steps.meta.outputs.tags }}"
+          echo "Labels: ${{ steps.meta.outputs.labels }}"
+
       - name: Build Docker image (latest)
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v3.0.0
         with:
-          context: .
           push: true
+          context: .
+          file: ./docker/Dockerfile.latest
           platforms: ${{ matrix.platform }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            BUILD_HASH=${{ github.sha }}
+          no-cache: true  # 禁用缓存
 
       - name: Export digest
         run: |

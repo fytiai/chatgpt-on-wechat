@@ -1,6 +1,5 @@
 name: Build and publish Docker image
 
-
 on:
   push:
     branches: ['main']
@@ -9,7 +8,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  FULL_IMAGE_NAME: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+  FULL_IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
   build-main-image:
